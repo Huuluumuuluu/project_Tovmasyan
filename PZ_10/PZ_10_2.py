@@ -3,18 +3,14 @@
 #стихотворной форме предварительно поставив после последней строки автора и название
 #произведения.
 
-# Чтение
-text = open('text18-30.txt', encoding='utf-8').read()
+t = open('text18-30.txt', encoding='utf-8').read()
+print(t)
 
-# Вывод
-print(text)
+p = 0
+for ch in t:
+    if ch in '.,!?;:…':
+        p += 1
+print('Знаков препинания:', p)
 
-# Подсчёт знаков препинания (функционально)
-punct = sum(1 for ch in text if ch in '.,!?;:…')
-print('Знаков препинания:', punct)
-
-# Создание нового файла
-open('text18-30_out.txt', 'w', encoding='utf-8').write(
-    text + '\nМихаил Лермонтов «Бородино»'
-)
+open('text18-30_out.txt', 'w', encoding='utf-8').write(t + '\nМихаил Лермонтов «Бородино»')
 print('Готово')
