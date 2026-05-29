@@ -8,20 +8,21 @@
 #Индекс последнего максимального элемента второго файла:
 #Элементы кратные 4 первого и второго файлов:
 
-d1 = [-5, 12, -3, 8, -1, 7, -10, 4]
-d2 = [6, -2, 9, -4, 3, -8, 11, -6, 5]
+open('n1.txt','w').write('-5 12 -3 8 -1 7 -10 4')
+open('n2.txt','w').write('6 -2 9 -4 3 -8 11 -6 5')
 
-open('n1.txt', 'w').write(' '.join(map(str, d1)))
-open('n2.txt', 'w').write(' '.join(map(str, d2)))
+a = [int(x) for x in open('n1.txt').read().split()]
+b = [int(x) for x in open('n2.txt').read().split()]
 
-a = list(map(int, open('n1.txt').read().split()))
-b = list(map(int, open('n2.txt').read().split()))
+i1 = a.index(min(a))
+i2 = len(b)-1-b[::-1].index(max(b))
 
-r = open('res.txt', 'w')
-r.write(f'1:{a}\n2:{b}\nlen:{len(a)} {len(b)}\n'
-        f'min1:{a.index(min(a))}\n'
-        f'max2:{len(b) - 1 - b[::-1].index(max(b))}\n'
-        f'mod4:{list(filter(lambda x: x % 4 == 0, a + b))}')
+k4 = []
+for x in a+b:
+    if x%4==0:
+        k4.append(x)
+
+r = open('res.txt','w')
+r.write(f'1:{a}\n2:{b}\nlen:{len(a)} {len(b)}\nmin1:{i1}\nmax2:{i2}\nmod4:{k4}')
 r.close()
-
 print('ok')
