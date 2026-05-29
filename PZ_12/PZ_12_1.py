@@ -20,7 +20,7 @@ def input_positive_int(prompt):
 
 def main():
     print("=" * 50)
-    print("ЗАДАНИЕ 1 (Вариант 30): элементы >10 заменить на 0")
+    print("элементы >10 заменить на 0")
     print("=" * 50)
 
     rows = input_positive_int("Введите количество строк: ")
