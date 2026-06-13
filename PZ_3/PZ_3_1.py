@@ -1,31 +1,32 @@
-# Задача 2 (Вариант 30): найти номер числа, отличного от остальных трёх равных
+# Задача 1 (Вариант 30): проверка, является ли треугольник равносторонним
 
-def find_unique_index(numbers):
-    """Возвращает индекс (начиная с 1) числа, отличающегося от остальных."""
-    for i in range(4):
-        if numbers.count(numbers[i]) == 1:
-            return i + 1
-    return -1  # на случай, если условия задачи не соблюдены
+def is_equilateral_triangle(a, b, c):
+    """Проверяет, может ли существовать треугольник и является ли он равносторонним."""
+    # Проверка существования треугольника
+    if a + b > c and a + c > b and b + c > a:
+        return a == b == c
+    return False
 
 
-def main_task2():
-    print("=== Поиск числа, отличного от трёх равных ===")
-    nums = []
-    for i in range(1, 5):
+def main_task1():
+    print("=== Проверка равностороннего треугольника ===")
+    sides = []
+    names = ["первую", "вторую", "третью"]
+    for i in range(3):
         while True:
             try:
-                value = int(input(f"Введите {i}-е целое число: "))
-                nums.append(value)
+                value = int(input(f"Введите {names[i]} сторону треугольника (целое число): "))
+                sides.append(value)
                 break
             except ValueError:
-                print("Ошибка: введите целое число!")
+                print("Ошибка: нужно ввести целое число!")
 
-    pos = find_unique_index(nums)
-    if pos != -1:
-        print(f"Число, отличное от остальных, находится на позиции {pos}")
+    a, b, c = sides
+    if is_equilateral_triangle(a, b, c):
+        print(f"Треугольник со сторонами {a}, {b}, {c} является равносторонним.")
     else:
-        print("Ошибка: условие 'одно число отлично от трёх равных' не выполнено.")
+        print(f"Треугольник со сторонами {a}, {b}, {c} НЕ является равносторонним.")
 
 
 if __name__ == "__main__":
-    main_task2()
+    main_task1()
