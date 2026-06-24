@@ -8,21 +8,31 @@
 #Индекс последнего максимального элемента второго файла:
 #Элементы кратные 4 первого и второго файлов:
 
-open('n1.txt','w').write('-5 12 -3 8 -1 7 -10 4')
-open('n2.txt','w').write('6 -2 9 -4 3 -8 11 -6 5')
+def read_numbers(filename):
+    with open(filename, encoding='utf-8') as f:
+        return [int(x) for x in f.read().split()]
 
-a = [int(x) for x in open('n1.txt').read().split()]
-b = [int(x) for x in open('n2.txt').read().split()]
+list1 = read_numbers('text 1')
+list2 = read_numbers('text 2')
 
-i1 = a.index(min(a))
-i2 = len(b)-1-b[::-1].index(max(b))
+# индекс первого минимального элемента первого файла
+first_min_idx = list1.index(min(list1)) + 1
 
-k4 = []
-for x in a+b:
-    if x%4==0:
-        k4.append(x)
+# индекс последнего максимального элемента второго файла
+max2 = max(list2)
+last_max_idx = len(list2) - list2[::-1].index(max2)
 
-r = open('res.txt','w')
-r.write(f'1:{a}\n2:{b}\nlen:{len(a)} {len(b)}\nmin1:{i1}\nmax2:{i2}\nmod4:{k4}')
-r.close()
-print('ok')
+# элементы, кратные 4
+mult4_1 = [x for x in list1 if x % 4 == 0]
+mult4_2 = [x for x in list2 if x % 4 == 0]
+
+with open('result.txt', 'w', encoding='utf-8') as f:
+    f.write(f'Элементы первого файла: {list1}\n')
+    f.write(f'Элементы второго файла: {list2}\n')
+    f.write(f'Количество элементов первого и второго файлов: {len(list1)} и {len(list2)}\n')
+    f.write(f'Индекс первого минимального элемента первого файла: {first_min_idx}\n')
+    f.write(f'Индекс последнего максимального элемента второго файла: {last_max_idx}\n')
+    f.write(f'Элементы кратные 4 первого файла: {mult4_1}\n')
+    f.write(f'Элементы кратные 4 второго файла: {mult4_2}\n')
+
+print("Результат записан в result.txt")
